@@ -1,0 +1,148 @@
+/* --------------------------------------------------------------------------
+   Nav measured from the reference: brand lockup left, five wide-tracked
+   uppercase links right, and — unusually — a hamburger sitting alongside the
+   full link row rather than replacing it. The active link is marked by an
+   amber dot beneath, not by an underline or a weight change.
+   -------------------------------------------------------------------------- */
+
+.nav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 70;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: clamp(64px, 7.5vw, 108px);
+  padding: 0 var(--gutter);
+}
+
+.nav__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(8px, 1vw, 15px);
+  color: var(--text);
+  text-decoration: none;
+}
+
+.nav__mark {
+  width: clamp(30px, 3.8vw, 55px);
+  height: clamp(30px, 3.8vw, 55px);
+  flex: none;
+}
+
+.nav__word {
+  font-size: clamp(14px, 1.8vw, 26px);
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.nav__set {
+  display: flex;
+  align-items: center;
+  gap: clamp(18px, 3.6vw, 52px);
+}
+
+.nav__link {
+  position: relative;
+  font-size: clamp(9px, 0.82vw, 12px);
+  font-weight: 400;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.82);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.3s var(--ease-out);
+}
+
+.nav__link:hover {
+  color: #fff;
+}
+
+.nav__link.is-active {
+  color: #fff;
+}
+
+.nav__link.is-active::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -0.85em;
+  width: 4px;
+  height: 4px;
+  margin-left: -2px;
+  border-radius: 999px;
+  background: var(--amber);
+}
+
+.nav__burger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: clamp(14px, 3.3vw, 48px);
+  padding: 8px 0 8px 8px;
+  background: none;
+  border: 0;
+  color: var(--text);
+  cursor: pointer;
+}
+
+/* Full-bleed menu — the nav keeps its hamburger at every width, so the panel
+   is a real destination rather than a mobile fallback. */
+
+.menu {
+  position: fixed;
+  inset: 0;
+  z-index: 69;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(6px, 1vw, 14px);
+  padding: 0 var(--gutter);
+  background: rgba(14, 19, 26, 0.94);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+  animation: menu-in 0.4s var(--ease-out) both;
+}
+
+.menu a {
+  font-size: clamp(28px, 5vw, 68px);
+  font-weight: 200;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  text-decoration: none;
+  width: fit-content;
+  transition: color 0.3s var(--ease-out);
+}
+
+.menu a:hover {
+  color: var(--amber);
+}
+
+@keyframes menu-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (max-width: 940px) {
+  .nav__link {
+    display: none;
+  }
+
+  .nav__burger {
+    margin-left: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menu {
+    animation: none;
+  }
+
+  .menu a,
+  .nav__link {
+    transition: none;
+  }
+}

@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Tokens. Dark cinematic reference: one warm accent against cool shadow, no
+   surfaces at all beyond a hairline rule and one outlined circle.
+
+   Footage samples from hero.mp4 vary a lot across the loop — the headline band
+   swings from #2f3843 to #877260 — so the left scrim is sized for the brightest
+   frame, not the first one.
+   --------------------------------------------------------------------------- */
+:root {
+  --amber: #d9a86a;
+  --amber-lift: #e6bb84;
+
+  --shadow-deep: #151b23;
+  --ground-warm: #7f7366;
+
+  --text: rgba(255, 255, 255, 0.96);
+  --text-soft: rgba(255, 255, 255, 0.68);
+  --text-faint: rgba(255, 255, 255, 0.5);
+  --hair: rgba(255, 255, 255, 0.55);
+
+  --gutter: clamp(20px, 4.5vw, 66px);
+
+  --ease-out: cubic-bezier(0.22, 0.68, 0.32, 1);
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Jost', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    background: var(--shadow-deep);
+    color: var(--text);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-synthesis-weight: none;
+  }
+
+  #root {
+    width: 100%;
+    min-height: 100svh;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--amber);
+    outline-offset: 4px;
+    border-radius: 3px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
